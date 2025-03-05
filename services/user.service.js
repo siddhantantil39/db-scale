@@ -38,6 +38,21 @@ class UserService{
             throw error;
         }
     }
+    
+    async getAllUsers(){
+        try {
+            const users = await User.findAll();
+
+            if(users.length==0){
+                throw new Error('Got empty user array')
+            }
+
+            return users;
+        } catch (error) {
+            console.error('Error fetching users:', error);
+            throw error;
+        }
+    }
 
 };
 

@@ -1,3 +1,4 @@
+const userService = require('../services/user.service');
 const UserService = require('../services/user.service');
 
 class UserController {
@@ -72,6 +73,29 @@ class UserController {
         
               res.status(500).json({ 
                 error: 'Failed to retrieve user',
+                details: error.message 
+              });
+        }
+    }
+
+    async getAllUsers(req, res){
+        try {
+            const users = await userService.getAllUsers();
+
+            res.status(200).json({
+                users: users.map(user => ({
+                    id: user.id,
+                    firstName: user.firstName,
+                    lastName: user.lastName,
+                    email: user.email,
+                    age: user.age,
+                    isActive: user.isActive
+                })),
+                length: users.length
+            });
+        } catch (error) {
+            return res.status(500).json({ 
+                error: 'Failed to retrieve users',
                 details: error.message 
               });
         }

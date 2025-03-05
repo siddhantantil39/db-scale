@@ -25,7 +25,7 @@ async function startServer() {
   try {
     // Initialize database
     await initializeDatabase();
-    console.log(process.env.port)
+    // console.log(process.env.port)
     const PORT = process.env.PORT || 3000;
     app.listen(PORT, () => {
       console.log(`Server running on port ${PORT}`);
